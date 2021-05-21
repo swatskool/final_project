@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>Roblox for Noobs</title>
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="icon" href="https://img.icons8.com/color/48/000000/roblox.png" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"> </script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
+
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+
+<body style="background-color: rgb(61,59,59);">
+  <br>
+  <div class="container">
+    <div class="row">
+      <nav class="nav navbar-custom">
+        <a class="navbar-brand" href="Home.html">Home</a>
+        <a class="navbar-brand" href="abtProject.html">About the Project</a>
+        <a class="navbar-brand" href="abtTeam.html">Meet the Team</a>
+      </nav>
+    </div>
+    <br>
+    <div class="row">
+      <img class="rounded mx-auto d-block" src="../static/Images/logo.jpg" alt="Roblox LOGO">
+    </div>
+    <br>
+    <div class="row">
+
+      <div class="jumbotron container-fluid" style=" padding-top: 0px; padding-bottom : 10px;">
+        <h1 style="color: rgb(133, 8, 8);">Let's learn Roblox games today</h1>
+
+        <br>
+        <div class="row" style="text-align:left; padding-left: 315px;">
+          <h4><strong>Step1: </strong>Select your favorite Game Category
+
+
+            <select id="dd1" onchange="buildCharts()">
+              <option value="Popular">Popular</option><br>
+              <option value="Up-and-Coming">Up-and-Coming</option><br>
+              <option value="Most Engaging">Most Engaging</option><br>
+              <option value="Top Rated">Top Rated</option>
+            </select>
+
+
+          </h4>
+          <br>
+          <br>
+        </div>
+        <div style="text-align: left;padding-left: 300px;">
+          <h4><strong>Step 2: </strong>Choose the game property to customize your view</h4>
+          <h4><strong>Step 3: </strong>Click on the game you want to learn</h4>
+          <h4><strong>Step 4: </strong>Check out the Top 5 videos based on your selected criteria</h4>
+          <h4><strong>Step 5: </strong>Select a video and learn how to play your favorite game!</h4>
+        </div>
+      </div>
+    </div>
+    </div>
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-md-2">
+
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">Game Property</h3>
+          </div>
+          <div id="dd-selectprop" class="panel-body">
+            <h4>
+              <select id="dd2" onchange="buildCharts()">
+                <option value="No. Players" text ="No. of Players">No. of Players</option><br>
+                <option value="Rating" text ="Rating">Rating</option><br>
+              </select>
+            </h4>
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-10">
+        <div id="viz" style="height:700px">
+        </div>
+        <br>
+      </div>
+    </div>
+
+  <div class="row">here</div>
+</div>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
+
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">Videos based on </h3>
+
+        </div>
+        <div id="dd-selectvideoprop" class="panel-body">
+          <h4>
+            <select id="dd3" onchange="update_bubbles()">
+              <option value="Views">Views</option><br>
+              <option value="Likes">Likes</option><br>
+              <option value="Comment Count">Comment Count</option><br>
+            </select>
+          </h4>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-md-10">
+      <div id="bubble" style="height:700px">
+      </div>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-md-2" style="background-color: black; color:whitesmoke">
+      <h2>YouTube URL</h2>
+
+    </div>
+    <br>
+    <div class="col-md-10" style="background-color: rgb(133,8,8); color:whitesmoke; ">
+      <a id="url" class="link" style="color: whitesmoke; font-size:16px;"></a>
+      <h2></h2></a>
+    </div>
+  </div>
+
+  </div>
+</div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.2/js/umd/util.js"></script>
+  <script src="https://d3js.org/d3.v6.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="../static/js/app.js"></script>
+  <script src="../static/js/json_data.json"></script>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+h1 {
+text-align: center; 
+color:  rgb(133,8,8);
+font-family: 'Zapf-Chancery', cursive;
+
+  }
+.row {
+    text-align: center;
+}
+.rounded mx-auto d-block{
+width:1130px;
+ height: 150px;
+}
+
+#viz{
+  background-color: whitesmoke;
+  background-size: 100%;
+  width: 1350px;
+  height: 700px;
+align-content:center
+}
+
+#bubble {
+    width:100%;
+    height: 100%;
+}
+button {
+  background-color: rgb(133,8,8);
+  color: whitesmoke;
+  padding: 15px 32px;
+  text-align: center;
+  font-size: 24px;
+  display: inline-block;
+  vertical-align: middle;
+
+}
+
+
+
+.col-md-1 {
+    display:inline-block;
+}
+ .navbar-custom {
+            background-color:  rgb(133,8,8);
+	height: 50px;
+
+        }
+     
+ .navbar-custom .navbar-brand,
+ .navbar-custom .navbar-text {
+            color: white;
+	font-weight:bolder;
+	font-size: 15px;
+	vertical-align: middle;
+        }
+
+.panel-primary > .panel-heading {
+  background-color: rgb(133,8,8);
+}
+
+.img{
+margin: auto;
+text-align: center;
+}
+
