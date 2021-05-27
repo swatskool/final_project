@@ -23,6 +23,7 @@ Base.prepare(engine, reflect=True)
 # Save reference to the table
 game_table = Base.classes.games
 video_table = Base.classes.videos
+model_table = Base.classes.model_data
 
 
 app = Flask(__name__)
@@ -34,6 +35,33 @@ app = Flask(__name__)
 @app.route("/")
 def Index():
     return render_template("index.html")
+
+@app.route("/predictor")
+def predict():
+    session = Session(engine)
+    model_info = session.query(model_table).all()
+    
+    model_data = []
+    
+    for data in model_info:
+
+        model_inputs = {}
+
+        model = data.Title
+
+        model_inputs= {
+            'Title': model,
+            'Age': data.Age,
+            'Engagement Per Day': data.Engagement,
+            'Title Words': data.Title_Words,
+            'Desc Words': data.Desc_Words,
+            'Category': bool(data.Category)
+        }
+
+        model_data.append(model_inputs)
+
+    session.close()
+    return (jsonify(model_data))
 
 
 @app.route("/api")
