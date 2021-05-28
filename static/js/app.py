@@ -1,4 +1,5 @@
 import numpy as np
+import requests
 import sqlalchemy
 from sqlalchemy.ext.automap import automap_base
 from sqlalchemy.orm import Session
@@ -7,7 +8,9 @@ import psycopg2
 from flask import Flask, jsonify, render_template, redirect
 import datetime as dt
 # make sure you have your own config on your computer in the SQL folder
+import joblib
 from config import key
+from flask import request
 
 pg_user = 'postgres'
 pg_pwd = key
@@ -25,6 +28,9 @@ game_table = Base.classes.games
 video_table = Base.classes.videos
 model_table = Base.classes.model_data
 
+with open ('lrmodel.joblib','rb') as f :
+    lr = joblib.load(f)
+
 
 app = Flask(__name__)
 #################################################
@@ -36,7 +42,8 @@ app = Flask(__name__)
 def Index():
     return render_template("index.html")
 
-@app.route("/predictor")
+
+@app.route("/predictor", methods=["GET", "POST"])
 def predict():
     session = Session(engine)
     model_info = session.query(model_table).all()
@@ -61,7 +68,22 @@ def predict():
         model_data.append(model_inputs)
 
     session.close()
-    return (jsonify(model_data))
+#     return (jsonify(model_data))
+# def model_prediction():
+    if request.method == "POST":
+        title_text = [request.form[title_text]]
+        descr_text = [request.form[description_text]]
+        age = 0
+        engage = 0
+        
+
+        engagement = lr.predict([[age,engage,title_text,descr_text]])
+
+        if engagement:
+            out_text =  "Your game has the potential to be ENGAGING"
+        else:
+            out_text = "Your game may NOT be engaging enough yet !"
+        return out_text
 
 
 @app.route("/api")
