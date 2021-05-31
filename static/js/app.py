@@ -25,73 +25,76 @@ game_table = Base.classes.games
 video_table = Base.classes.videos
 model_table = Base.classes.model_data
 
-app=Flask(__name__)
+app = Flask(__name__)
 
-models={'vpd.sav': 'Visitors Per Day', 
-        'lpd.sav': 'Likes Per Day', 
+models = {'vpd.sav': 'Visitors Per Day',
+        'lpd.sav': 'Likes Per Day',
         'dpd.sav': 'Dislikes Per Day',
-        'rpd.sav': 'Ratings Per Day', 
+        'rpd.sav': 'Ratings Per Day',
         'fpd.sav': 'Favorites Per Day'}
-input_columns=['Title length', 
-			   'Desc length', 
-			   'Maximum Visits', 
+input_columns = ['Title length',
+			   'Desc length',
+			   'Maximum Visits',
 			   'Title+Description']
 
-with open('models/vpd.sav', 'rb') as f: 
-	vpd_rfr=pickle.load(f)
-with open('models/lpd.sav', 'rb') as f: 
-	lpd_rfr=pickle.load(f)
-with open('models/dpd.sav', 'rb') as f: 
-	dpd_rfr=pickle.load(f)
-with open('models/rpd.sav', 'rb') as f: 
-	rpd_rfr=pickle.load(f)	
-with open('models/fpd.sav', 'rb') as f: 
-	fpd_rfr=pickle.load(f)
-with open('models/gc_awards.sav', 'rb') as f: 
-	awards_rfr=pickle.load(f)
-with open('models/text_vectorizer.sav', 'rb') as f: 
-	cvt=pickle.load(f)
+with open('../../models/vpd.sav', 'rb') as f:
+	vpd_rfr = pickle.load(f)
+with open('../../models/lpd.sav', 'rb') as f:
+	lpd_rfr = pickle.load(f)
+with open('../../models/dpd.sav', 'rb') as f:
+	dpd_rfr = pickle.load(f)
+with open('../../models/rpd.sav', 'rb') as f:
+	rpd_rfr = pickle.load(f)
+with open('../../models/fpd.sav', 'rb') as f:
+	fpd_rfr = pickle.load(f)
+with open('../../models/gc_awards.sav', 'rb') as f:
+	awards_rfr = pickle.load(f)
+with open('../../models/text_vectorizer.sav', 'rb') as f:
+	cvt = pickle.load(f)
 
-def data_cleaning(text_list): 
-    stopwords_rem=True
-    stopwords_en=stopwords.words('english')
-    lemmatizer=WordNetLemmatizer()
-    tokenizer=TweetTokenizer()
-    reconstructed_list=[]
-    for each_text in text_list: 
-        lemmatized_tokens=[]
-        tokens=tokenizer.tokenize(each_text.lower())
-        pos_tags=pos_tag(tokens)
-        for each_token, tag in pos_tags: 
-            if tag.startswith('NN'): 
-                pos='n'
-            elif tag.startswith('VB'): 
-                pos='v'
-            else: 
-                pos='a'
-            lemmatized_token=lemmatizer.lemmatize(each_token, pos)
-            if stopwords_rem: # False 
-                if lemmatized_token not in stopwords_en: 
+
+def data_cleaning(text_list):
+    stopwords_rem = True
+    stopwords_en = stopwords.words('english')
+    lemmatizer = WordNetLemmatizer()
+    tokenizer = TweetTokenizer()
+    reconstructed_list = []
+    for each_text in text_list:
+        lemmatized_tokens = []
+        tokens = tokenizer.tokenize(each_text.lower())
+        pos_tags = pos_tag(tokens)
+        for each_token, tag in pos_tags:
+            if tag.startswith('NN'):
+                pos = 'n'
+            elif tag.startswith('VB'):
+                pos = 'v'
+            else:
+                pos = 'a'
+            lemmatized_token = lemmatizer.lemmatize(each_token, pos)
+            if stopwords_rem:  # False
+                if lemmatized_token not in stopwords_en:
                     lemmatized_tokens.append(lemmatized_token)
-            else: 
+            else:
                 lemmatized_tokens.append(lemmatized_token)
         reconstructed_list.append(' '.join(lemmatized_tokens))
     return reconstructed_list
 
 
 def deEmojify(text):
-    regrex_pattern = re.compile(pattern = "["
+    regrex_pattern = re.compile(pattern="["
         u"\U0001F600-\U0001F64F"  # emoticons
         u"\U0001F300-\U0001F5FF"  # symbols & pictographs
         u"\U0001F680-\U0001F6FF"  # transport & map symbols
         u"\U0001F1E0-\U0001F1FF"  # flags (iOS)
-                           "]+", flags = re.UNICODE)
-    output = regrex_pattern.sub(r' ',text).replace('\n','').replace('[','').replace(']','').replace('\r','')
+                           "]+", flags=re.UNICODE)
+    output = regrex_pattern.sub(r' ', text).replace(
+        '\n', '').replace('[', '').replace(']', '').replace('\r', '')
     return output
 # app = Flask(__name__)
 #################################################
 # Flask Routes
 #################################################
+
 
 @app.route("/api")
 def api():
@@ -138,7 +141,7 @@ def api():
                     'pub_date': video.pub_date,
                 }
                 videos_list.append(video_data)
-        
+
         roblox_dict = {
             'game': game,
             'game_data': game_data,
@@ -152,15 +155,16 @@ def api():
 
 
 @app.route('/')
-def home(): 
-	return render_template('index.html')
+def home():
+	return render_template('/index.html')
+
 
 @app.route('/predict', methods=['GET', 'POST'])
-def predict(): 
-	inputs=request.form
-    title = deEmojify(inputs['title'])
-    description = deEmojify(inputs['description'])
-    title_length = len(title)
+def predict():
+	inputs = request.form
+	title = deEmojify(inputs['title'])
+	description = deEmojify(inputs['description'])
+	title_length = len(title)
 	description_length=len(description)
 	max_visits=int(inputs['max_visits'])
 	title_description=data_cleaning([title+" "+description])
@@ -169,13 +173,13 @@ def predict():
 			   description_length, 
 			   max_visits]+title_description_vector
 	# return jsonify({'Visitors Per Day': vpd})
-	output_dict={'vpd': vpd_rfr.predict([input_ary])[0], 
-				 'lpd': lpd_rfr.predict([input_ary])[0], 
-				 'dpd': dpd_rfr.predict([input_ary])[0], 
-				 'rpd': rpd_rfr.predict([input_ary])[0], 
-				 'fpd': fpd_rfr.predict([input_ary])[0]}
+	output_dict={'vpd': round(vpd_rfr.predict([input_ary])[0]), 
+				 'lpd': round(lpd_rfr.predict([input_ary])[0]), 
+				 'dpd': round(dpd_rfr.predict([input_ary])[0]), 
+				 'rpd': round(rpd_rfr.predict([input_ary])[0]), 
+				 'fpd': round(fpd_rfr.predict([input_ary])[0])}
 	awards_count=awards_rfr.predict([list(output_dict.values())])[0]
-	return render_template('index.html', **output_dict, awards_in_template=awards_count)
+	return render_template('index.html', **output_dict, awards_in_template=round(awards_count))
 
 if __name__ == '__main__':
     app.run(debug=True)
