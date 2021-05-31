@@ -155,27 +155,27 @@ def api():
 def home(): 
 	return render_template('index.html')
 
-@app.route('/predict', methods=['GET', 'POST'])
+@app.route('templates/index/predict', methods=['GET', 'POST'])
 def predict(): 
-	inputs=request.form
+    inputs=request.form
     title = deEmojify(inputs['title'])
     description = deEmojify(inputs['description'])
     title_length = len(title)
-	description_length=len(description)
-	max_visits=int(inputs['max_visits'])
-	title_description=data_cleaning([title+" "+description])
-	title_description_vector=cvt.transform(title_description).toarray()[0].tolist()
-	input_ary=[title_length, 
+    description_length=len(description)
+    max_visits=int(inputs['max_visits'])
+    title_description=data_cleaning([title+" "+description])
+    title_description_vector=cvt.transform(title_description).toarray()[0].tolist()
+    input_ary=[title_length, 
 			   description_length, 
 			   max_visits]+title_description_vector
 	# return jsonify({'Visitors Per Day': vpd})
-	output_dict={'vpd': vpd_rfr.predict([input_ary])[0], 
+    output_dict={'vpd': vpd_rfr.predict([input_ary])[0], 
 				 'lpd': lpd_rfr.predict([input_ary])[0], 
 				 'dpd': dpd_rfr.predict([input_ary])[0], 
 				 'rpd': rpd_rfr.predict([input_ary])[0], 
 				 'fpd': fpd_rfr.predict([input_ary])[0]}
-	awards_count=awards_rfr.predict([list(output_dict.values())])[0]
-	return render_template('index.html', **output_dict, awards_in_template=awards_count)
+    awards_count=awards_rfr.predict([list(output_dict.values())])[0]
+    return render_template('index.html', **output_dict, awards_in_template=awards_count)
 
 if __name__ == '__main__':
     app.run(debug=True)

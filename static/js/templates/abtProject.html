@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+  <title>Roblox for Noobs</title>
+
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/css/style.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link rel="icon" href="https://img.icons8.com/color/48/000000/roblox.png"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"> </script>
+  <script src= "https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>  
+</head>
+<body style = "background-color: rgb(61,59,59);">
+<br>
+<div class="container" >  
+  <div class="row" style="width:1130px;">
+      <nav class="nav navbar-custom"   style="width:1130px;"   >
+        <a class="navbar-brand" href="Home.html">Home</a>
+        <a class="navbar-brand" href="abtProject.html">About the Project</a>
+        <a class="navbar-brand" href="abtTeam.html">Meet the Team</a>
+      </nav>
+  </div>  
+  <br>
+  <div class = "row">
+    <img class="rounded mx-auto d-block" src="../static/Images/logo.jpg"  alt="Roblox LOGO">
+ </div>
+    <div class="row" style="padding: 10pt;"></div>
+    <div class = "row" style="border: rgb(113, 141, 138); border-style: solid; border-width: thick; padding: 5px; background-color:whitesmoke;" >
+      <h1> <p style="text-align:center">About this project </p>
+        <br>
+      <p>
+        What we have created for you is for gamers of all ages, backgrounds, and walks of life.  We have decided to create a platform for people who like to play Roblox.  To get started, select your game category of choice: Most Popular, Most Engaging, Up-and–Coming,  or Top Rated.  After the selection, the top 10 games from the category will be reflected on the webpage. If you want to learn more about any game, our web page will provide the you with several of the top videos from YouTube for tutorials of how to play that game.   </p> 
+      <br>
+      <u>Project Technical Details</u><br>
+      
+      <br><p>We scraped game information from the Roblox website as our starting point. Roblox has multiple categories of games to select from, with approximately 60 games for each category.  We limited our scope to include 10 games from each of the Most Popular, Most Engaging, Up-and-Coming, and Top Earning games categories.</p>
+      <br><p> To create our Roblox site, we used JavaScript, PgAdmin (query), Python, Flask, and html. When viewing the Roblox site, the content continues to load after initial connection to the page. As a result, it was necessary to enable the Web Driver for the browser to allow faster loading speeds and to facilitate scraping of all content available.  </p>
+      <br><p>We transformed the data to reflect the user rating as an integer to allow us to sort the games by user ratings. We also updated the game titles to ensure the YouTube query returned good results.</p>
+      <br><p>Using a static key word search and the game names returned from the web scrape, we queried the top views, like counts, comment counts, publish date and URL for the top 5 results returned from YouTube on "learn to play <roblox_game>".</p>
+      <br><p>We created drop-down menus to access our data and to make an easy selection for the user based on their preferences.  First, the user will select from four categories. Then, the user selects their choice of game property choices (either game ratings or number of players).  Next, the user will select their game of choice from the returned results (of 10 games per category). Once a game is selected, five of the top YouTube videos will appear for the user to view.  Another drop-down menu will offer selection of how to view the YouTube videos (based on View Count, Comment Count, or Like Count). The URL for the current YouTube video is also displayed.  </p>
+      </h1>
+      <!-- <ul style="text-align: left; color:rgb(133,8,8)"></h1>
+        <h2>
+        <li>Alyson Amtman</li>
+        <p> Alyson is a ....</p>
+        <li>Felix Pronove</li>
+        <p>Felix is a young blood ...</p>
+        <li>Kim Christensen</li>
+      <p>Kim is a ... </p>
+      <li>Swati Oberoi Dham</li>
+        <p>A passionate software engineer and educator, Swati loves to teach fine nuances of programming to young minds. Teaching video game designing is her favorit and that's where the tiny Roblox seed got planted.</p>
+          
+      </ul>
+    </h2> -->
+    <br>
+    </h1> 
+    </div>
+
+  </div>
+  <!-- <div class="row" style="padding: 10pt;"></div> -->
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.2/js/umd/util.js"></script>
+ 
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  < -->
+  <script src="./static/js/app.js"></script>
+  <!-- <script src="./static/js/bonus.js"></script> -->
+  <!-- <script src="samples.json"></script> -->
+  
+</body>
+
+</html>
