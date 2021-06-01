@@ -15,15 +15,16 @@ import re
 
 
 url = "postgres://pboxloirkjoupo:04094f4b3c94d1ac4ebe22d906c08a8f3cca3b9f1dc6d2e15fe9aed7febc70bd@ec2-52-0-114-209.compute-1.amazonaws.com:5432/d56rcfsun0ardt"
-engine = create_engine(f'{url}')
+engine = create_engine(url)
 # reflect an existing database into a new model
 Base = automap_base()
 # reflect the tables
 Base.prepare(engine, reflect=True)
 # Save reference to the table
-# game_table = Base.classes.games
-# video_table = Base.classes.videos
-# model_table = Base.classes.model_data
+print(Base.classes.keys())
+game_table = Base.classes.games
+video_table = Base.classes.videos
+model_table = Base.classes.model_data
 
 app = Flask(__name__)
 
@@ -90,73 +91,73 @@ def deEmojify(text):
     output = regrex_pattern.sub(r' ', text).replace(
         '\n', '').replace('[', '').replace(']', '').replace('\r', '')
     return output
-# app = Flask(__name__)
-#################################################
+app = Flask(__name__)
+################################################
 # Flask Routes
-#################################################
+################################################
 
 
-# @app.route("/api")
-# def api():
-#     session = Session(engine)
-#     game_info = session.query(game_table).all()
-#     video_info = session.query(video_table).all()
+@app.route("/api")
+def api():
+    session = Session(engine)
+    game_info = session.query(game_table).all()
+    video_info = session.query(video_table).all()
 
-#     roblox_data = []
-#     roblox_dict = {}
-#     game = ""
+    roblox_data = []
+    roblox_dict = {}
+    game = ""
 
-#     for data in game_info:
+    for data in game_info:
 
-#         game_data = {}
+        game_data = {}
 
-#         game = data.game_title
+        game = data.game_title
 
-#         game_data = {
-#             'game_category': data.game_category,
-#             'game_id': data.game_id,
-#             'user_count': data.user_count,
-#             'positive_ratings': data.positive_ratings,
-#             'game_url': data.game_url,
-#             'game_image_url': data.game_image_url
-#         }
-#         video_info = session.query(video_table).filter(
-#             video_table.game_title == game).all()
-#         videos_list = []
+        game_data = {
+            'game_category': data.game_category,
+            'game_id': data.game_id,
+            'user_count': data.user_count,
+            'positive_ratings': data.positive_ratings,
+            'game_url': data.game_url,
+            'game_image_url': data.game_image_url
+        }
+        video_info = session.query(video_table).filter(
+            video_table.game_title == game).all()
+        videos_list = []
 
-#         for video in video_info:
+        for video in video_info:
 
-#             video_data = {}
+            video_data = {}
 
-#             if video.game_title == game:
+            if video.game_title == game:
 
-#                 video_data = {
-#                     # 'game_title': video.game_title,
-#                     'video_name': video.video_name,
-#                     'yt_views': video.yt_views,
-#                     'yt_likes': video.yt_likes,
-#                     'yt_comments': video.yt_comments,
-#                     'yt_thumbnail': video.yt_thumbnail,
-#                     'video_url': video.video_url,
-#                     'pub_date': video.pub_date,
-#                 }
-#                 videos_list.append(video_data)
+                video_data = {
+                    # 'game_title': video.game_title,
+                    'video_name': video.video_name,
+                    'yt_views': video.yt_views,
+                    'yt_likes': video.yt_likes,
+                    'yt_comments': video.yt_comments,
+                    'yt_thumbnail': video.yt_thumbnail,
+                    'video_url': video.video_url,
+                    'pub_date': video.pub_date,
+                }
+                videos_list.append(video_data)
 
-#         roblox_dict = {
-#             'game': game,
-#             'game_data': game_data,
-#             'video_data': videos_list
-#         }
+        roblox_dict = {
+            'game': game,
+            'game_data': game_data,
+            'video_data': videos_list
+        }
 
-#         roblox_data.append(roblox_dict)
-#         videos_list = []
-#     session.close()
-#     return (jsonify(roblox_data))
+        roblox_data.append(roblox_dict)
+        videos_list = []
+    session.close()
+    return (jsonify(roblox_data))
 
 
 @app.route('/')
 def home():
-	return render_template('//index.html')
+	return render_template('index.html')
 
 
 @app.route('/predict', methods=['GET', 'POST'])

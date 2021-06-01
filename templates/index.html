@@ -25,62 +25,131 @@
         <a class="navbar-brand" href="Home.html">Home</a>
         <a class="navbar-brand" href="abtProject.html">About the Project</a>
         <a class="navbar-brand" href="abtTeam.html">Meet the Team</a>
+        <a class="navbar-brand" href="index.html">Try your own game !</a>
       </nav>
     </div>  
     <br>
     <div class = "row">
       <img class="rounded mx-auto d-block" src="../static/Images/logo.jpg"  alt="Roblox LOGO">
     </div>
-    <div class="row" style="padding: 10pt;">
+    <br>
+  
+    <!-- <div class = "row">
+      <img class="rounded mx-auto d-block" src="../static/Images/wwtb_roblox_millionaire.jpg"  alt="millionaire" style="height: 200px;">
+    </div> -->
+
+    <!-- <div class="row" style="padding: 10pt;">
       <div class="col-md-12" style="padding-top: 50px;">
         <a href="Home.html" class="btn btn-danger btn-block" role="button" aria-pressed="true" style="font-size:24px;">Let's get started !</a>
       </div>
-    </div>  
+    </div>   -->
+    <br>
   </div>
   <div class = "container">
     <div class = "row" style="border: rgb(113, 141, 138); border-style: solid; border-width: thick; padding: 5px; background-color:whitesmoke;" >
-      <h1> 
-        <p style="text-align:center">Welcome to our page.</p><br> Here you will select your game category of choice, then select a video for how to play your game and off you go on your journey into the Roblox World. <br> Enjoy!
+      <h1 style="text-align: center;"> 
+        <p >What's your game idea ?</p>
+        <p>Do you have an idea for a game? We can predict how your game will perform in the future and how many awards it may win <br>['Most Engaging Game', 'Most Popular Game', 'Up & Coming Game', 'Top Rated Game' ]  </p><br>
+        <p> ENTER THE DETAILS OF YOUR GAME BELOW </p>
       </h1>
     </div>
   </div>
   <!-- dropdown code -->
   <div class = container>
     <div class = "row">
-      <div class="col-xs-6" padding= 10px> <!-- dropdown div -->
+      <div class="col-md-12" padding= 10px> <!-- dropdown div -->
+        <br>
+        
         <form action='/predict' method='POST'>
           <!-- Added header for date search -->
           <!-- adding more to form submission - need to update table in db -->
           <!-- <div class="col-xs-6"> -->
-          Title: 
-          <input type="textarea" id="title" name="title" maxlength="500" value='rainbows + unicorns' padding=5px>
+          <div class ="col-md-4" style="color: whitesmoke;">
+            <h3>
+          Title of your game: <br>
+          <!-- <input type="textarea" id="title" name="title" maxlength="500" value='rainbows + unicorns' style="color: black;" padding=5px row> -->
+          <textarea id="title" name="title" rows="4" cols="35" value = 'rainbows + unicorns' style="color:black;">rainbows + unicorns</textarea>
           </br>
-          Description: 
-          <textarea id="description" name="description" rows="10" cols="30">I want to create a game that allows people to build houses with rainbows and unicorns</textarea>
+        </h3>
+          </div>  
+          <div class="col-md-4" style="color: whitesmoke;">
+            <h3>
+
+          Description for your game: 
+          <textarea id="description" name="description" rows="6" cols="38" style="color: black;">I want to create a game that allows people to build houses with rainbows and unicorns</textarea>
           </br>
-          Max Visits: 
-          <input type="text" id="max_visits" name="max_visits" maxlength="30" value=25 padding=5px>
+        </h3>
+        </div>
+        <div class="col-md-4" style="color: whitesmoke;">
+          <h3>
+        
+          How many visitors will be allowed?: <br>
+          <input type="text" id="max_visits" name="max_visits" maxlength="35" value=25 padding=5px style="color: black;">
           </br>
-          <input type="submit">
+        </h3>
+        </div>
+        <div class="col-md-4">
+          <br>
+          <h3>
+          <input type="submit" value="Predict">
+        </h3>
+        </div>
         </form>
+      
       </div>
     </div>
+    <br>
+
+
     <div class="row">
       
-      <div style="color: whitesmoke;">
-        <h2>Visitors per day: {{ vpd }}</h2>
-        <h2>Likes per day: {{ lpd }}</h2>
-        <h2>Dislikes per day: {{ dpd }}</h2>
-        <h2>Ratings per day: {{ rpd }}</h2>
-        <h2>Favorites per day: {{ fpd }}</h2>
-        <h2>Number of Awards: {{ awards_in_template }}</h2>
+      <div class="col-md-12" style="color: whitesmoke;">
+        <div class="col-md-3">
+          <h2>Visitors / day: {{ vpd }}</h2>
+        </div>
+        <div class="col-md-3">
+          <h2>Likes / day: {{ lpd }}</h2>
+        </div>
+        <div class="col-md-3">
+          <h2>Dislikes / day: {{ dpd }}</h2>
+        </div>
+        <!-- <div class="col-md-2">
+          <h2>Ratings / day: {{ rpd }}</h2>
+          
+        </div> -->
+
+        <div class="col-md-3">
+          <h2>Favorites / day: {{ fpd }}</h2>
+          
+        </div>
+
+
+
+
+        
+        
+        
+        <br>
+        
       </div>
+      </div>
+      <br>
+      <br>
+      <div class="row">
+      <div class="col-md-12" style="background-color: rgb(133,8,8)">
+        <marquee>
+        <strong>
+        <h2 style="color: whitesmoke;">Number of Awards: {{ awards_in_template }}</h2>
+      </strong>
+      </marquee>
+    </div>
     </div>
 </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.2/js/umd/util.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.5.0/d3.js"> </script>
+  <script src="../static/js/app.js"></script>
   <!-- <script src="../static/js/update_sankey.js"></script> -->
 </body>
 </html>
