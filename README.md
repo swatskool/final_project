@@ -4,7 +4,10 @@
 The requirements of this team project were to perform machine learning on a problem worth solving.  Then we needed to use Scikit-Learn and host the application using Heroku.
 
 # Project Purpose and Data Sources
-The purpose of our project was to predict what Roblox game a user would be recommended based on their current gaming behavior.  Current gaming behavior would be 
+The purpose of our project was to predict what Roblox game a user would be recommended based on their current gaming behavior.  
+
+## Summary of Findings
+**
 
 # Final Conclusions
 In conclusion, the model will give users the abiltity to improve the appeal of their game.
