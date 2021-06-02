@@ -7,7 +7,7 @@ The requirements of this team project were to perform machine learning on a prob
 The purpose of our project was to predict what Roblox game a user would be recommended based on their current gaming behavior.  Current gaming behavior would be 
 
 # Final Conclusions
-In conlusion, the model will give users the abiltity to improve the appeal of their game.
+In conclusion, the model will give users the abiltity to improve the appeal of their game.
 
 # ML Visualizations
 ![final_awards_distribution](/static/Images/final_awards_distribution.png)
