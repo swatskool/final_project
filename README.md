@@ -16,3 +16,13 @@ In conlusion, the model will give users the abiltity to improve the appeal of th
 
 # About Roblox
 [Roblox](https://www.roblox.com/) is an tnteractive gaming platform and game creation system that allows users to program games and play games created by other users.  Roblox is ranked as one of the top online entertainment platforms for audiences under the age of 18.
+
+## Contact Information
+
+DU Data Analytics Bootcamp
+Final Project
+Tuesday, June 1, 2021
+Presented by: Alyson Amtman, Kim Christensen, Sara Kayhan, Swati Oberoi Dham, Felix Pronove, Aishwarya Rao, and Joey Riebel
+Colorado, United States
+
+Team time to complete: approximately 65 hours.
