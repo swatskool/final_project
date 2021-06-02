@@ -6,8 +6,12 @@ The requirements of this team project were to perform machine learning on a prob
 # Project Purpose and Data Sources
 The purpose of our project was to predict what Roblox game a user would be recommended based on their current gaming behavior.  
 
+![final_wordcloud](/static/Images/final_wordcloud.png)
+
 ## Summary of Findings
-**
+** More words isn't necessarily better
+** It's not just what words you have, but the combinations matter
+** Likes and ratings are highly correlated
 
 # Final Conclusions
 In conclusion, the model will give users the abiltity to improve the appeal of their game.
