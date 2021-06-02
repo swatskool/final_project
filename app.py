@@ -91,7 +91,7 @@ def deEmojify(text):
     output = regrex_pattern.sub(r' ', text).replace(
         '\n', '').replace('[', '').replace(']', '').replace('\r', '')
     return output
-app = Flask(__name__)
+
 ################################################
 # Flask Routes
 ################################################
@@ -158,6 +158,23 @@ def api():
 @app.route('/')
 def home():
 	return render_template('index.html')
+
+@app.route('/index')
+def index():
+	return render_template('index.html')
+
+@app.route('/Home')
+def other_home():
+	return render_template('Home.html')
+
+
+@app.route('/abtProject')
+def abtProject():
+	return render_template('abtProject.html')
+
+@app.route('/abtTeam')
+def abtTeam():
+	return render_template('abtTeam.html')
 
 
 @app.route('/predict', methods=['GET', 'POST'])
